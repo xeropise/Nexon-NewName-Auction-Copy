@@ -22,14 +22,17 @@ ${commitMsg}""",
   )
 }
 
+
 pipeline {
   agent any
 
   tools {
     jdk 'jdk17'
   }
+
   environment {
-    IMAGE_NAME = "${env.BRANCH_NAME.replace("/", "_")}_${getGitCommitPretty()}"
+    JAVA_HOME = 'tool jdk17'
+    IMAGE_NAME = '${env.BRANCH_NAME.replace("/", "_")}_${getGitCommitPretty()}'
   }
 
   stages {
@@ -39,43 +42,24 @@ pipeline {
       }
     }
 
-    stage('prepared') {
-      steps {
-        sendMessage('🚙 start', 'Nexon NewGame Auction build start')
-      }
-    }
-
     stage('build') {
       steps {
         sh 'java -version'
-        sh './gradlew clean build --parallel --build-cache'
+        sh './gradlew clean build'
       }
     }
 
-
-    stage('ecr login') {
+    stage('Push image') {
       steps {
-        sh '$(aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 961997623925.dkr.ecr.ap-northeast-2.amazonaws.com)'
-      }
-    }
+        script {
+          docker.withRegistry('https://166132032896.dkr.ecr.ap-northeast-2.amazonaws.com', 'ecr:ap-northeast-2:Aws-Accesskey') {
+            app = docker.build("166132032896.dkr.ecr.ap-northeast-2.amazonaws.com/new_name_auction")
+            app.push("latest_${env.BUILD_ID}")
+          }
 
-    stage('docker build && upload') {
-      steps {
-        sh """docker build -t 961997623925.dkr.ecr.ap-northeast-2.amazonaws.com/sunhwa-producer:${IMAGE_NAME} -f ./Dockerfile ./"""
-        sh """
-            docker push 961997623925.dkr.ecr.ap-northeast-2.amazonaws.com/sunhwa-producer:${IMAGE_NAME}
-            docker rmi 961997623925.dkr.ecr.ap-northeast-2.amazonaws.com/sunhwa-producer:${IMAGE_NAME}
-            """
+          sh """docker rmi 166132032896.dkr.ecr.ap-northeast-2.amazonaws.com/new_name_auction:latest_${env.BUILD_ID}"""
+        }
       }
-    }
-  }
-
-  post {
-    success {
-      sendMessage('👍 success', 'good')
-    }
-    failure {
-      sendMessage('😭 fail', 'warning')
     }
   }
 }
