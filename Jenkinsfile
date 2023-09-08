@@ -49,15 +49,50 @@ pipeline {
       }
     }
 
-    stage('Push image') {
+    stage('Build image & Push To ECR') {
       steps {
         script {
           docker.withRegistry('https://166132032896.dkr.ecr.ap-northeast-2.amazonaws.com', 'ecr:ap-northeast-2:Aws-Accesskey') {
             app = docker.build("166132032896.dkr.ecr.ap-northeast-2.amazonaws.com/new_name_auction")
-            app.push("latest_${env.BUILD_ID}")
+            app.push("latest")
           }
 
-          sh """docker rmi 166132032896.dkr.ecr.ap-northeast-2.amazonaws.com/new_name_auction:latest_${env.BUILD_ID}"""
+          sh """docker rmi 166132032896.dkr.ecr.ap-northeast-2.amazonaws.com/new_name_auction:latest"""
+        }
+      }
+    }
+
+    stage('Deploy AWS') {
+      steps {
+        script {
+          env.EB_APPLICATION_NAME = "New_Name_Auction_BackEnd"
+          env.BUCKET_NAME = "elasticbeanstalk-ap-northeast-2-166132032896"
+          env.EB_ENV_NAME = "NewNameAuctionBackEnd-env-2"
+
+          sh """whoami"""
+
+          sh """aws s3 cp "./Dockerrun.aws.json" s3://${BUCKET_NAME}/json/${EB_APPLICATION_NAME}-${getGitCommitPretty()}.aws.json \
+            --region ap-northeast-2"""
+
+          sleep time: 1000, unit: 'MILLISECONDS'
+
+          sh """
+            # Execute Beanstalk
+            aws elasticbeanstalk create-application-version \\
+                --region ap-northeast-2 \\
+                --application-name ${EB_APPLICATION_NAME} \\
+                --version-label ${getGitCommitPretty()}-${env.BUILD_ID} \\
+                --source-bundle S3Bucket="${BUCKET_NAME}",S3Key="json/${EB_APPLICATION_NAME}-${getGitCommitPretty()}.aws.json"
+            """
+
+          sleep time: 1000, unit: 'MILLISECONDS'
+
+          sh """
+          aws elasticbeanstalk update-environment \\
+              --environment-name ${EB_ENV_NAME} \\
+              --region ap-northeast-2 \\
+              --version-label ${getGitCommitPretty()}-${env.BUILD_ID}
+             """
         }
       }
     }
