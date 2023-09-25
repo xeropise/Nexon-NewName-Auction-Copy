@@ -2,6 +2,8 @@ package com.auction.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,6 +16,8 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Configuration
@@ -23,16 +27,18 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(authorize ->
-                        authorize
-                                .requestMatchers("/login").permitAll()
-                                .anyRequest().authenticated()
-                )
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 세션 사용 하지 않음
+                .and()
+                .formLogin().disable()
                 .httpBasic().disable()
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .authorizeHttpRequests()
+                .requestMatchers("/login").permitAll()
+                .anyRequest().permitAll();
 
+        http.csrf().disable();
         http.cors((it) -> corsConfigurationSource());
+
+        // http.exceptionHandling().authenticationEntryPoint().accessDeniedHandler();
 
         return http.build();
     }
@@ -53,14 +59,14 @@ public class SecurityConfig {
     private CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        List allowMethod = new ArrayList();
-        allowMethod.add("GET");
-        allowMethod.add("POST");
-        allowMethod.add("PUT");
-        allowMethod.add("DELETE");
+        List allowMethod = Arrays.asList(
+                HttpMethod.GET.name(),
+                HttpMethod.POST.name(),
+                HttpMethod.PUT.name(),
+                HttpMethod.DELETE.name()
+        );
 
-        List allowHeaders = new ArrayList();
-        allowHeaders.add("*");
+        List allowHeaders = Collections.singletonList("*");
 
         configuration.setAllowedMethods(allowMethod);
         configuration.setAllowCredentials(true);

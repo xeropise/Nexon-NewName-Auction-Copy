@@ -1,0 +1,67 @@
+sogong:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    open-in-view: false
+    properties:
+      hibernate:
+        format-sql: false
+        show-sql: true
+        order_inserts: true
+        order_updates: true
+        jdbc.batch_size: 50
+        connection.provider_disables_autocommit: false
+        query.fail_on_pagination_over_collection_fetch: false
+    show-sql: true
+---
+spring:
+  config:
+    activate:
+      on-profile: develop
+sogong:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    open-in-view: false
+    properties:
+      hibernate:
+        format-sql: false
+        show-sql: true
+        order_inserts: true
+        order_updates: true
+        jdbc.batch_size: 50
+        connection.provider_disables_autocommit: false
+        query.fail_on_pagination_over_collection_fetch: false
+    show-sql: true
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+sogong:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    open-in-view: false
+    properties:
+      hibernate:
+        format-sql: false
+        show-sql: true
+        order_inserts: true
+        order_updates: true
+        jdbc.batch_size: 50
+        connection.provider_disables_autocommit: false
+        query.fail_on_pagination_over_collection_fetch: false
+    show-sql: true

@@ -1,0 +1,87 @@
+spring:
+  config:
+    activate:
+      on-profile: develop
+sogong:
+  datasource:
+    master:
+      hikari:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://lvup-api-dev-cluster.cluster-ctwe4uxujswv.ap-northeast-2.rds.amazonaws.com:3306/lvup_api?useLegacyDatetimeCode=false&useUnicode=yes&characterEncoding=UTF-8&server-lvup-api
+        username: bigpicture
+        password: bigpicture1379!
+        auto-commit: false
+        minimum-idle: 1
+        maximum-pool-size: 3
+        pool-name: master-pool
+        max-lifetime: 30000
+    slave:
+      hikari:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://lvup-api-dev-cluster.cluster-ro-ctwe4uxujswv.ap-northeast-2.rds.amazonaws.com:3306/lvup_api?useLegacyDatetimeCode=false&useUnicode=yes&characterEncoding=UTF-8&server-lvup-api
+        username: bigpicture
+        password: bigpicture1379!
+        auto-commit: false
+        minimum-idle: 1
+        maximum-pool-size: 3
+        pool-name: slave-pool
+        max-lifetime: 30000
+---
+spring:
+  config:
+    activate:
+      on-profile: stage
+sogong:
+  datasource:
+    master:
+      hikari:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://lvup-api-stage-replica2-cluster.cluster-ctwe4uxujswv.ap-northeast-2.rds.amazonaws.com:3306/lvup_api?useLegacyDatetimeCode=false&useUnicode=yes&characterEncoding=UTF-8&server-lvup-api
+        username: bigpicture
+        password: bigpicture1379!
+        auto-commit: false
+        minimum-idle: 1
+        maximum-pool-size: 3
+        pool-name: master-pool
+        max-lifetime: 30000
+    slave:
+      hikari:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://lvup-api-stage-replica2-cluster.cluster-ro-ctwe4uxujswv.ap-northeast-2.rds.amazonaws.com:3306/lvup_api?useLegacyDatetimeCode=false&useUnicode=yes&characterEncoding=UTF-8&server-lvup-api
+        username: bigpicture
+        password: bigpicture1379!
+        auto-commit: false
+        minimum-idle: 1
+        maximum-pool-size: 3
+        pool-name: slave-pool
+        max-lifetime: 30000
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+sogong:
+  datasource:
+    master:
+      hikari:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://lvup-arena-prod-cluster.cluster-ctwe4uxujswv.ap-northeast-2.rds.amazonaws.com:3306/lvup_api?useLegacyDatetimeCode=false&useUnicode=yes&characterEncoding=UTF-8&server-lvup-api
+        username: admin
+        password: LZrxnvJh6MDBKQLn8S!
+        auto-commit: false
+        minimum-idle: 1
+        maximum-pool-size: 5
+        pool-name: master-pool
+        max-lifetime: 30000
+    slave:
+      hikari:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://lvup-arena-prod-cluster.cluster-ro-ctwe4uxujswv.ap-northeast-2.rds.amazonaws.com:3306/lvup_api?useLegacyDatetimeCode=false&useUnicode=yes&characterEncoding=UTF-8&server-lvup-api
+        username: admin
+        password: LZrxnvJh6MDBKQLn8S!
+        auto-commit: false
+        minimum-idle: 1
+        maximum-pool-size: 10
+        pool-name: slave-pool
+        max-lifetime: 30000
+---
