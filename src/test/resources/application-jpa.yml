@@ -1,0 +1,23 @@
+auction:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      jakarta:
+        persistence:
+          sharedCache:
+            mode: ALL
+      hibernate:
+        format-sql: false
+        show-sql: true
+        order_inserts: true
+        order_updates: true
+        jdbc.batch_size: 50
+        connection.provider_disables_autocommit: false
+        query.fail_on_pagination_over_collection_fetch: true
+    show-sql: true
+    open-in-view: false

@@ -10,5 +10,4 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserRegisterService {
     private final UserRepository userRepository;
-
 }

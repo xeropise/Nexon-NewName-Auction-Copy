@@ -2,10 +2,19 @@ package com.auction.user.repository;
 
 import com.auction.user.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 import java.util.UUID;
 
 public interface UserRepository extends JpaRepository<UserEntity, UUID> {
-    Optional<UserEntity> findByUserId(String userName);
+
+    @Query(
+            """
+            SELECT u FROM UserEntity u 
+            LEFT JOIN FETCH u.roles r 
+            WHERE u.userId = :uuid
+          """
+    )
+    Optional<UserEntity> findByUserId(UUID uuid);
 }

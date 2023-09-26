@@ -22,6 +22,10 @@ dependencies {
     // spring
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+    // flyway
+    implementation 'org.flywaydb:flyway-mysql'
 
     // lombok
     implementation 'org.projectlombok:lombok'
@@ -41,7 +45,6 @@ dependencies {
     implementation 'com.mysql:mysql-connector-j'
 
     // test
-    testImplementation 'org.mockito.kotlin:mockito-kotlin:4.1.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation "org.testcontainers:testcontainers:1.17.6"
     testImplementation "org.testcontainers:mysql:1.17.6"

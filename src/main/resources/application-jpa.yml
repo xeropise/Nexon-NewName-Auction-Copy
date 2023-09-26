@@ -1,13 +1,16 @@
-sogong:
+auction:
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5Dialect
+    database-platform: org.hibernate.dialect.MySQLDialect
     generate-ddl: false
     hibernate:
       ddl-auto: validate
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    open-in-view: false
     properties:
+      jakarta:
+        persistence:
+          sharedCache:
+            mode: ALL
       hibernate:
         format-sql: false
         show-sql: true
@@ -15,16 +18,17 @@ sogong:
         order_updates: true
         jdbc.batch_size: 50
         connection.provider_disables_autocommit: false
-        query.fail_on_pagination_over_collection_fetch: false
+        query.fail_on_pagination_over_collection_fetch: true
     show-sql: true
+    open-in-view: false
 ---
 spring:
   config:
     activate:
       on-profile: develop
-sogong:
+auction:
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5Dialect
+    database-platform: org.hibernate.dialect.MySQLDialect
     generate-ddl: false
     hibernate:
       ddl-auto: validate
@@ -32,6 +36,10 @@ sogong:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     open-in-view: false
     properties:
+      jakarta:
+        persistence:
+          sharedCache:
+            mode: ALL
       hibernate:
         format-sql: false
         show-sql: true
@@ -46,9 +54,9 @@ spring:
   config:
     activate:
       on-profile: prod
-sogong:
+auction:
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5Dialect
+    database-platform: org.hibernate.dialect.MySQLDialect
     generate-ddl: false
     hibernate:
       ddl-auto: validate
@@ -56,6 +64,10 @@ sogong:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     open-in-view: false
     properties:
+      jakarta:
+        persistence:
+          sharedCache:
+            mode: ALL
       hibernate:
         format-sql: false
         show-sql: true

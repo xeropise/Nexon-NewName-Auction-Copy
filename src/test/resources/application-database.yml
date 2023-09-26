@@ -4,7 +4,7 @@ auction:
     master:
       hikari:
         driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
-        jdbc-url: jdbc:tc:mysql:5.7.34:///test
+        jdbc-url: jdbc:tc:mysql:8.0.23:///test
         username: test
         password: test
         auto-commit: false
@@ -15,7 +15,7 @@ auction:
     slave:
       hikari:
         driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
-        jdbc-url: jdbc:tc:mysql:5.7.34:///test
+        jdbc-url: jdbc:tc:mysql:8.0.23:///test
         username: test
         password: test
         auto-commit: false
