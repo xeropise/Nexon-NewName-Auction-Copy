@@ -29,11 +29,18 @@
   - [젠킨스 => ElasticBeanstalk 로 ECR을 통해 배포하기(2)](https://velog.io/@xeropise1/%EC%A0%A0%ED%82%A8%EC%8A%A4%EC%97%90%EC%84%9C-AWS-CLI%EB%A5%BC-%ED%86%B5%ED%95%B4-elastic-bean-stalk%EB%A1%9C-ECR-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B02)
 
 ---
-### 💡인증 시스템 개발 (2023.09.21 ~ )
+### 💡인증 시스템 개발 (2023.09.21 ~)
 
 - [Session이란?](https://velog.io/@xeropise1/HTTP%EC%97%90%EC%84%9C-%EC%9D%B8%EC%A6%9D-%EC%BF%A0%ED%82%A4-%EC%84%B8%EC%85%98)
 - [JWT 란?](https://velog.io/@xeropise1/JWT-%EB%9E%80)
 - [JWT 인증 vs Session 인증](https://velog.io/@xeropise1/%EC%84%B8%EC%85%98-%EC%9D%B8%EC%A6%9D-vs-JWT-%EC%9D%B8%EC%A6%9D)
+
+<br>
+
+- 유저 도메인
+
+![유저 도메인](https://velog.velcdn.com/images/xeropise1/post/32194bb6-0148-4a3d-8494-0d2b4a99d01a/image.png)
+
 
 ---
 ### 💡비지니스 개발
