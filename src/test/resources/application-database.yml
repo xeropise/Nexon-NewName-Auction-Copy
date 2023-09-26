@@ -1,5 +1,5 @@
 ---
-sogong:
+auction:
   datasource:
     master:
       hikari:

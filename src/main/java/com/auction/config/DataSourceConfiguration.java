@@ -15,20 +15,21 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.auction.common.constant.DataSourceConstant.MASTER;
+import static com.auction.common.constant.DataSourceConstant.SLAVE;
+
 @Configuration
 public class DataSourceConfiguration {
 
-    private final String MASTER = "master";
-    private final String SLAVE = "slave";
-
 
     @Bean(MASTER)
-    @ConfigurationProperties(prefix = "sogong.datasource.master.hikari")
+    @ConfigurationProperties(prefix = "auction.datasource.master.hikari")
     DataSource masterDataSource() {
         return DataSourceBuilder.create().type(HikariDataSource.class).build();
     }
 
     @Bean(SLAVE)
+    @ConfigurationProperties(prefix = "auction.datasource.slave.hikari")
     DataSource slaveDataSource() {
         return DataSourceBuilder.create().type(HikariDataSource.class).build();
     }
@@ -59,11 +60,11 @@ public class DataSourceConfiguration {
         protected Object determineCurrentLookupKey() {
             if (TransactionSynchronizationManager.isCurrentTransactionReadOnly()) {
                 // log.info { "Slave Working" }
-                return "slave";
+                return SLAVE;
             }
 
             // log.info { "Master Working" }
-            return "master";
+            return MASTER;
         }
     }
 }

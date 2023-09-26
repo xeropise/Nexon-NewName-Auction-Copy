@@ -40,6 +40,12 @@ dependencies {
     // mysql-connector
     implementation 'com.mysql:mysql-connector-j'
 
+    // test
+    testImplementation 'org.mockito.kotlin:mockito-kotlin:4.1.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation "org.testcontainers:testcontainers:1.17.6"
+    testImplementation "org.testcontainers:mysql:1.17.6"
+    testImplementation "org.testcontainers:junit-jupiter:1.17.6"
 }
 
 // === ⭐ QueryDsl 빌드 옵션 (선택) ===
