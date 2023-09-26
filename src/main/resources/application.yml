@@ -16,9 +16,6 @@ server:
       enabled: false
   port: 3002
   shutdown: graceful
-  tomcat:
-    mbeanregistry:
-      enabled: true
 ---
 spring:
   config:
