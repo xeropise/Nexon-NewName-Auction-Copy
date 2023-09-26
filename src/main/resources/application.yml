@@ -1,0 +1,44 @@
+spring.application.name: server-api
+spring:
+  profiles:
+    include: database, jpa, flyway
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+  mustache:
+    check-template-location: false
+
+server:
+  error:
+    whitelabel:
+      enabled: false
+  port: 3002
+  shutdown: graceful
+  tomcat:
+    mbeanregistry:
+      enabled: true
+---
+spring:
+  config:
+    activate:
+      on-profile: develop
+
+server:
+  tomcat:
+    threads:
+      min-spare: 50
+      max: 50
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+server:
+  tomcat:
+    threads:
+      min-spare: 50
+      max: 50
+---
