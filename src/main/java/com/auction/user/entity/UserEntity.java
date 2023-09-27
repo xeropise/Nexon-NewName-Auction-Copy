@@ -4,15 +4,17 @@ package com.auction.user.entity;
 import com.auction.common.entity.AbstractSystemEntity;
 import com.auction.user.model.RoleType;
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Table(name = "USER")
+@NoArgsConstructor
 public class UserEntity extends AbstractSystemEntity {
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -62,6 +64,10 @@ public class UserEntity extends AbstractSystemEntity {
 
     public String getEmail() {
         return this.email;
+    }
+
+    public List<RoleType> getRoles() {
+        return roles.stream().map(it -> it.getRoleType()).toList();
     }
 
     public static UserEntity create(
