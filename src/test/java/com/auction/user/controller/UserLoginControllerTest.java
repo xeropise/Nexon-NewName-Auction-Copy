@@ -3,6 +3,8 @@ package com.auction.user.controller;
 import com.auction.common.constant.UserEndPointPath;
 import com.auction.user.model.request.UserLoginRequest;
 import com.auction.user.model.request.UserRegisterRequest;
+import com.auction.user.repository.UserRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -21,6 +23,14 @@ import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 public class UserLoginControllerTest {
     @Autowired
     private final MockMvc mockMvc = null;
+
+    @Autowired
+    private final UserRepository userRepository = null;
+
+    @AfterEach
+    void delete_all() {
+        userRepository.deleteAll();
+    }
 
     @Test
     public void user_register_login_test() throws Exception {
@@ -43,7 +53,7 @@ public class UserLoginControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                 ).andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isCreated());
     }
 
     private void reigster_first(String account, String password, String email) throws Exception {

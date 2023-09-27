@@ -11,7 +11,7 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
 
     @Query(
             """
-            SELECT u FROM UserEntity u 
+            SELECT DISTINCT u FROM UserEntity u 
             LEFT JOIN FETCH u.roles r 
             WHERE u.userId = :uuid
           """
@@ -20,7 +20,7 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
 
     @Query(
             """
-            SELECT u FROM UserEntity u 
+            SELECT DISTINCT u FROM UserEntity u 
             LEFT JOIN FETCH u.roles r 
             WHERE u.account = :account
           """
@@ -29,7 +29,7 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
 
     @Query(
             """
-            SELECT u FROM UserEntity u 
+            SELECT DISTINCT u FROM UserEntity u 
             LEFT JOIN FETCH u.roles r 
             WHERE u.email = :email
           """

@@ -49,13 +49,16 @@ dependencies {
     testImplementation "org.testcontainers:testcontainers:1.17.6"
     testImplementation "org.testcontainers:mysql:1.17.6"
     testImplementation "org.testcontainers:junit-jupiter:1.17.6"
+
+    // formatter
+    implementation 'com.google.googlejavaformat:google-java-format:1.17.0'
 }
 
-// === ⭐ QueryDsl 빌드 옵션 (선택) ===
+// QueryDsl 빌드 옵션
 def querydslDir = "$buildDir/generated/querydsl"
 
 sourceSets {
-    main.java.srcDirs += [ querydslDir ]
+    main.java.srcDirs += [querydslDir]
 }
 
 tasks.withType(JavaCompile) {

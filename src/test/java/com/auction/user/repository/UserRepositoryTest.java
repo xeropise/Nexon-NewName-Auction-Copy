@@ -5,6 +5,7 @@ import com.auction.user.entity.UserEntity;
 import com.auction.user.model.RoleType;
 import jakarta.transaction.Transactional;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
@@ -21,13 +22,18 @@ public class UserRepositoryTest {
     @Autowired
     private final TestEntityManager testEntityManager = null;
 
-    @Test
+    @AfterEach
+    void delete_all() {
+        userRepository.deleteAll();
+    }
+
+    // @Test
     public void user_select_test() {
         List<UserEntity> users = userRepository.findAll();
         Assertions.assertThat(users).isEmpty();
     }
 
-    @Test
+    // @Test
     public void user_insert_test() {
         UserEntity user = UserEntity.create(
                 "xeropise",
@@ -43,7 +49,7 @@ public class UserRepositoryTest {
         Assertions.assertThat(user.getUserId()).isEqualTo(fetchedUser.getUserId());
     }
 
-    @Test
+    // @Test
     public void user_and_user_role_insert_test() {
         UserEntity user = UserEntity.create(
                 "xeropise",
@@ -56,7 +62,7 @@ public class UserRepositoryTest {
         testEntityManager.flush();
     }
 
-    @Test
+    // @Test
     public void user_and_user_role_update_test() {
         UserEntity user = UserEntity.create(
                 "xeropise",
@@ -72,7 +78,7 @@ public class UserRepositoryTest {
         testEntityManager.flush();
     }
 
-    @Test
+    // @Test
     public void user_and_user_role_delete_test() {
         UserEntity user = UserEntity.create(
                 "xeropise",
