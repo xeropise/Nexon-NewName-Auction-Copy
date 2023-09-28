@@ -5,6 +5,7 @@ import com.auction.common.model.ApiResponse;
 import com.auction.user.model.TokenDto;
 import com.auction.user.model.request.UserLoginRequest;
 import com.auction.user.service.UserLoginService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class UserLoginController {
     @PostMapping(UserEndPointPath.LOGIN)
     @ResponseStatus(HttpStatus.CREATED)
     public ApiResponse<TokenDto> login(
-            @RequestBody UserLoginRequest userLoginRequest
+            @Valid @RequestBody UserLoginRequest userLoginRequest
     ) {
         TokenDto token = userLoginService.loginByAccount(userLoginRequest.getAccount(), userLoginRequest.getPassword());
         return ApiResponse.success(token);

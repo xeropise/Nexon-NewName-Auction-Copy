@@ -7,6 +7,8 @@ import com.auction.user.exception.PasswordNotMatchException;
 import com.auction.user.exception.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -20,6 +22,15 @@ public class ExceptionController {
     ApiResponse unhandledException(Throwable throwable) {
         log.error("unhandledException message : {}", throwable.getMessage());
         return ApiResponse.fail(ResponseCode.INTERNAL_ERROR, "server internal error");
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    ApiResponse methodArgumentNotValidException(MethodArgumentNotValidException exception) {
+        ObjectError firstError = exception.getBindingResult().getAllErrors().get(0);
+
+        log.error("methodArgumentNotValidException message : {}", firstError.getDefaultMessage());
+        return ApiResponse.fail(ResponseCode.BAD_REQUEST, firstError.getDefaultMessage());
     }
 
     @ExceptionHandler(AccountExistsException.class)

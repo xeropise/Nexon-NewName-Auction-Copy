@@ -4,6 +4,7 @@ import com.auction.common.constant.UserEndPointPath;
 import com.auction.common.model.ApiResponse;
 import com.auction.user.model.request.UserRegisterRequest;
 import com.auction.user.service.UserRegisterService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +20,7 @@ public class UserRegisterController {
     @PostMapping(UserEndPointPath.REGISTER)
     @ResponseStatus(HttpStatus.CREATED)
     public ApiResponse register(
-            @RequestBody UserRegisterRequest userRegisterRequest
+            @Valid @RequestBody UserRegisterRequest userRegisterRequest
     ) {
         userRegisterService.register(
                 userRegisterRequest.getAccount(),
