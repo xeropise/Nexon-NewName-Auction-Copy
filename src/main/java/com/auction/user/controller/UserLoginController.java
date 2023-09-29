@@ -2,13 +2,13 @@ package com.auction.user.controller;
 
 import com.auction.common.constant.UserEndPointPath;
 import com.auction.common.model.ApiResponse;
-import com.auction.user.model.TokenDto;
+import com.auction.user.model.dto.TokenDto;
 import com.auction.user.model.request.UserLoginRequest;
+import com.auction.user.model.response.TokenResponse;
 import com.auction.user.service.UserLoginService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -21,10 +21,10 @@ public class UserLoginController {
 
     @PostMapping(UserEndPointPath.LOGIN)
     @ResponseStatus(HttpStatus.CREATED)
-    public ApiResponse<TokenDto> login(
+    public ApiResponse<TokenResponse> login(
             @Valid @RequestBody UserLoginRequest userLoginRequest
     ) {
-        TokenDto token = userLoginService.loginByAccount(userLoginRequest.getAccount(), userLoginRequest.getPassword());
-        return ApiResponse.success(token);
+        TokenDto tokenDto = userLoginService.loginByAccount(userLoginRequest.getAccount(), userLoginRequest.getPassword());
+        return ApiResponse.success(TokenResponse.from(tokenDto));
     }
 }

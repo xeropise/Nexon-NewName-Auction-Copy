@@ -28,9 +28,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (Objects.isNull(authorizationHeader)) {
             authorizationHeader = "";
         } else if (!authorizationHeader.startsWith(TOKEN_PREFIX)) {
-            authorizationHeader = authorizationHeader.replace(TOKEN_PREFIX, "");
+            authorizationHeader = "";
         }
-        return authorizationHeader;
+        return authorizationHeader = authorizationHeader.replace(TOKEN_PREFIX, "");
     }
 
     @Override

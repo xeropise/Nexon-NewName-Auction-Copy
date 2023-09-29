@@ -1,5 +1,6 @@
 package com.auction.user.model;
 
+import com.auction.user.model.type.RoleType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

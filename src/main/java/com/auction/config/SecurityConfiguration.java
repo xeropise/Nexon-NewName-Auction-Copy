@@ -38,6 +38,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, UserEndPointPath.LOGIN).permitAll()
                 .requestMatchers(HttpMethod.POST, UserEndPointPath.REGISTER).permitAll()
+                .requestMatchers(HttpMethod.GET, UserEndPointPath.SEARCH).authenticated()
                 .requestMatchers("/health").permitAll()
                 .anyRequest().permitAll()
                 .and()

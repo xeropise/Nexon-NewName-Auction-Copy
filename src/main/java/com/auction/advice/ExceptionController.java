@@ -51,6 +51,6 @@ public class ExceptionController {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     ApiResponse userNotFoundException(Exception exception) {
         log.error("userNotFoundException message : {}", exception.getMessage());
-        return ApiResponse.fail(ResponseCode.ACCOUNT_EXISTS, exception.getMessage());
+        return ApiResponse.fail(ResponseCode.USER_NOT_FOUND, exception.getMessage());
     }
 }

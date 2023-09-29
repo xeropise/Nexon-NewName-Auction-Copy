@@ -1,6 +1,6 @@
 package com.auction.common.component;
 
-import com.auction.user.model.RoleType;
+import com.auction.user.model.type.RoleType;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;

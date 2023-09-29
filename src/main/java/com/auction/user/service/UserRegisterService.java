@@ -2,7 +2,7 @@ package com.auction.user.service;
 
 import com.auction.user.entity.UserEntity;
 import com.auction.user.exception.AccountExistsException;
-import com.auction.user.model.RoleType;
+import com.auction.user.model.type.RoleType;
 import com.auction.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

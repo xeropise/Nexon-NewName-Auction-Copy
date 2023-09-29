@@ -1,16 +1,24 @@
 package com.auction.common.model;
 
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashMap;
 
-@Data
+
+@AllArgsConstructor
 @Getter
+@Setter
 public class ApiResponse<T> {
     private final ResponseHeader summary;
     private final T body;
+
+    public ApiResponse() {
+        this.summary = null;
+        this.body = null;
+    }
 
     public static <T> ApiResponse success(T body) {
         return new ApiResponse<>(ResponseHeader.success(), body);

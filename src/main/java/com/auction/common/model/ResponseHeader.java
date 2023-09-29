@@ -1,14 +1,22 @@
 package com.auction.common.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 public class ResponseHeader {
-    private final boolean isSuccess;
+    private final boolean success;
     private final ResponseCode code;
     private final String message;
+
+    public ResponseHeader() {
+        this.success = false;
+        this.code = null;
+        this.message = null;
+    }
 
     public static ResponseHeader success() {
         return new ResponseHeader(true, ResponseCode.SUCCESS, "");

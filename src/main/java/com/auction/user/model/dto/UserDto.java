@@ -1,6 +1,7 @@
-package com.auction.user.model;
+package com.auction.user.model.dto;
 
 import com.auction.user.entity.UserEntity;
+import com.auction.user.model.type.RoleType;
 import lombok.Getter;
 
 import java.util.List;

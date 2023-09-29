@@ -2,8 +2,7 @@ package com.auction.user.repository;
 
 import com.auction.AuctionDataJpaTest;
 import com.auction.user.entity.UserEntity;
-import com.auction.user.model.RoleType;
-import jakarta.transaction.Transactional;
+import com.auction.user.model.type.RoleType;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -11,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.util.List;
+import java.util.Optional;
 
 @AuctionDataJpaTest
-@Transactional
 public class UserRepositoryTest {
 
     @Autowired
@@ -27,13 +26,13 @@ public class UserRepositoryTest {
         userRepository.deleteAll();
     }
 
-    // @Test
+    @Test
     public void user_select_test() {
         List<UserEntity> users = userRepository.findAll();
         Assertions.assertThat(users).isEmpty();
     }
 
-    // @Test
+    @Test
     public void user_insert_test() {
         UserEntity user = UserEntity.create(
                 "xeropise",
@@ -44,12 +43,14 @@ public class UserRepositoryTest {
         user = userRepository.save(user);
         testEntityManager.flush();
 
-        UserEntity fetchedUser = userRepository.findByUserId(user.getUserId()).get();
+        Optional<UserEntity> optionalUser = userRepository.findByUserId(user.getUserId());
+
+        UserEntity fetchedUser = optionalUser.get();
 
         Assertions.assertThat(user.getUserId()).isEqualTo(fetchedUser.getUserId());
     }
 
-    // @Test
+    @Test
     public void user_and_user_role_insert_test() {
         UserEntity user = UserEntity.create(
                 "xeropise",
@@ -58,11 +59,12 @@ public class UserRepositoryTest {
         );
 
         user.addRole(RoleType.ADMIN);
+        user.addRole(RoleType.USER);
         user = userRepository.save(user);
         testEntityManager.flush();
     }
 
-    // @Test
+    @Test
     public void user_and_user_role_update_test() {
         UserEntity user = UserEntity.create(
                 "xeropise",
@@ -78,7 +80,7 @@ public class UserRepositoryTest {
         testEntityManager.flush();
     }
 
-    // @Test
+    @Test
     public void user_and_user_role_delete_test() {
         UserEntity user = UserEntity.create(
                 "xeropise",

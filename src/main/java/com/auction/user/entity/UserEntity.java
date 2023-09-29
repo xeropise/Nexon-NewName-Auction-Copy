@@ -2,7 +2,7 @@ package com.auction.user.entity;
 
 
 import com.auction.common.entity.AbstractSystemEntity;
-import com.auction.user.model.RoleType;
+import com.auction.user.model.type.RoleType;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;

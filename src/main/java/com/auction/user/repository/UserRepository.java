@@ -11,28 +11,28 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
 
     @Query(
             """
-            SELECT DISTINCT u FROM UserEntity u 
-            LEFT JOIN FETCH u.roles r 
-            WHERE u.userId = :uuid
-          """
+                      SELECT DISTINCT u FROM UserEntity u 
+                      LEFT JOIN FETCH u.roles r 
+                      WHERE u.userId = :uuid
+                    """
     )
     Optional<UserEntity> findByUserId(UUID uuid);
 
     @Query(
             """
-            SELECT DISTINCT u FROM UserEntity u 
-            LEFT JOIN FETCH u.roles r 
-            WHERE u.account = :account
-          """
+                      SELECT DISTINCT u FROM UserEntity u 
+                      LEFT JOIN FETCH u.roles r
+                      WHERE u.account = :account
+                    """
     )
     Optional<UserEntity> findByAccount(String account);
 
     @Query(
             """
-            SELECT DISTINCT u FROM UserEntity u 
-            LEFT JOIN FETCH u.roles r 
-            WHERE u.email = :email
-          """
+                      SELECT DISTINCT u FROM UserEntity u 
+                      LEFT JOIN FETCH u.roles r
+                      WHERE u.email = :email
+                    """
     )
     Optional<UserEntity> findByEmail(String email);
 
