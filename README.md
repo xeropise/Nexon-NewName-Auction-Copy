@@ -39,6 +39,8 @@
 <br>
 
 - 유저 도메인
+  - 2023.11.10일 구조 변경
+    - USER, USER_ROLE => USER, USER_ROLE, ROLE
 
 ![유저 도메인](https://velog.velcdn.com/images/xeropise1/post/5986ccf2-a041-42d0-a694-1378753c9c29/image.png)
 
