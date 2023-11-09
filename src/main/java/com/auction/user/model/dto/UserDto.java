@@ -37,7 +37,7 @@ public class UserDto {
                 user.getAccount(),
                 user.getPassword(),
                 user.getEmail(),
-                user.getRoles()
+                user.getUserRoles()
         );
     }
 }

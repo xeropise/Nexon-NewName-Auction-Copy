@@ -19,6 +19,9 @@ public class UserRepositoryTest {
     private final UserRepository userRepository = null;
 
     @Autowired
+    private final RoleRepository roleRepository = null;
+
+    @Autowired
     private final TestEntityManager testEntityManager = null;
 
     @AfterEach
@@ -34,14 +37,13 @@ public class UserRepositoryTest {
 
     @Test
     public void user_insert_test() {
-        UserEntity user = UserEntity.createUser(
+        UserEntity user = UserEntity.create(
                 "xeropise",
                 "1234",
                 "whrbql1@gmail.com"
         );
 
         user = userRepository.save(user);
-        testEntityManager.flush();
 
         Optional<UserEntity> optionalUser = userRepository.findByUserId(user.getUserId());
 
@@ -52,42 +54,43 @@ public class UserRepositoryTest {
 
     @Test
     public void user_and_user_role_insert_test() {
-        UserEntity user = UserEntity.createUser(
+        UserEntity user = UserEntity.create(
                 "xeropise",
                 "1234",
                 "whrbql1@gmail.com"
         );
 
-        user.addRole(RoleType.ADMIN);
+
+        user.addRole(roleRepository.findByRoleType(RoleType.USER));
         user = userRepository.save(user);
         testEntityManager.flush();
     }
 
     @Test
     public void user_and_user_role_update_test() {
-        UserEntity user = UserEntity.createUser(
+        UserEntity user = UserEntity.create(
                 "xeropise",
                 "1234",
                 "whrbql1@gmail.com"
         );
 
-        user.addRole(RoleType.ADMIN);
+        user.addRole(roleRepository.findByRoleType(RoleType.ADMIN));
         user = userRepository.save(user);
         testEntityManager.flush();
 
-        user.deleteRole(RoleType.ADMIN);
+        user.removeRole(roleRepository.findByRoleType(RoleType.ADMIN));
         testEntityManager.flush();
     }
 
     @Test
     public void user_and_user_role_delete_test() {
-        UserEntity user = UserEntity.createUser(
+        UserEntity user = UserEntity.create(
                 "xeropise",
                 "1234",
                 "whrbql1@gmail.com"
         );
 
-        user.addRole(RoleType.ADMIN);
+        user.addRole(roleRepository.findByRoleType(RoleType.ADMIN));
         user = userRepository.save(user);
         testEntityManager.flush();
 

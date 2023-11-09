@@ -18,32 +18,32 @@ public class UserRoleEntity extends AbstractSystemEntity {
     @Column(columnDefinition = "BINARY(16)")
     private UUID userRoleId;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "userId")
     private UserEntity user;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
+    @ManyToOne
+    @JoinColumn(name = "roleId")
+    private RoleEntity role;
 
-    public UserRoleEntity(UserEntity user, RoleType roleType) {
+    private UserRoleEntity(UserEntity user, RoleEntity role) {
         this.user = user;
-        this.roleType = roleType;
+        this.role = role;
     }
-
+    
     public UUID getUserRoleId() {
         return userRoleId;
     }
 
-    public void setUser(UserEntity user) {
-        this.user = user;
+    public RoleEntity getRole() {
+        return role;
     }
 
     public RoleType getRoleType() {
-        return roleType;
+        return role.getRoleType();
     }
 
-    public static UserRoleEntity create(UserEntity user, RoleType roleType) {
-        return new UserRoleEntity(user, roleType);
+    public static UserRoleEntity create(UserEntity user, RoleEntity role) {
+        return new UserRoleEntity(user, role);
     }
 }
