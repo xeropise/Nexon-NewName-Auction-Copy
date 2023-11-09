@@ -2,7 +2,6 @@ package com.auction.user.service;
 
 import com.auction.user.entity.UserEntity;
 import com.auction.user.exception.AccountExistsException;
-import com.auction.user.model.type.RoleType;
 import com.auction.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,7 +15,7 @@ public class UserRegisterService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public void register(
+    public void registerUser(
             String account,
             String password,
             String email
@@ -26,8 +25,7 @@ public class UserRegisterService {
         if (!userExists) {
             password = passwordEncoder.encode(password);
 
-            UserEntity user = UserEntity.create(account, password, email);
-            user.addRole(RoleType.USER);
+            UserEntity user = UserEntity.createUser(account, password, email);
             userRepository.save(user);
         } else {
             throw new AccountExistsException("user already exists");

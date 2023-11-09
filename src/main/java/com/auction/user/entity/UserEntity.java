@@ -34,16 +34,18 @@ public class UserEntity extends AbstractSystemEntity {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, orphanRemoval = true)
     private Set<UserRoleEntity> roles = new LinkedHashSet<>();
 
-    public UserEntity(String account, String password, String email, Set<UserRoleEntity> roles) {
+    private UserEntity(String account, String password, String email, Set<UserRoleEntity> roles) {
         this.account = account;
         this.password = password;
         this.email = email;
         this.roles = roles;
     }
 
-    public void addRole(RoleType roleType) {
+    public UserEntity addRole(RoleType roleType) {
         UserRoleEntity role = UserRoleEntity.create(this, roleType);
         roles.add(role);
+
+        return this;
     }
 
     public void deleteRole(RoleType roleType) {
@@ -70,11 +72,35 @@ public class UserEntity extends AbstractSystemEntity {
         return roles.stream().map(it -> it.getRoleType()).toList();
     }
 
-    public static UserEntity create(
+    private static UserEntity create(
             String account,
             String password,
             String email
     ) {
         return new UserEntity(account, password, email, new LinkedHashSet());
+    }
+
+    public static UserEntity createUser(
+            String account,
+            String password,
+            String email
+    ) {
+        return create(account, password, email).addRole(RoleType.USER);
+    }
+
+    public static UserEntity createAdminUser(
+            String account,
+            String password,
+            String email
+    ) {
+        return create(account, password, email).addRole(RoleType.ADMIN);
+    }
+
+    public static UserEntity createTest(
+            String account,
+            String password,
+            String email
+    ) {
+        return create(account, password, email).addRole(RoleType.TEST);
     }
 }

@@ -19,10 +19,10 @@ public class UserRegisterController {
 
     @PostMapping(UserEndPointPath.REGISTER)
     @ResponseStatus(HttpStatus.CREATED)
-    public ApiResponse register(
+    public ApiResponse registerUser(
             @Valid @RequestBody UserRegisterRequest userRegisterRequest
     ) {
-        userRegisterService.register(
+        userRegisterService.registerUser(
                 userRegisterRequest.getAccount(),
                 userRegisterRequest.getPassword(),
                 userRegisterRequest.getEmail()

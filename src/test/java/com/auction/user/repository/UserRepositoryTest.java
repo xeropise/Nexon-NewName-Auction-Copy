@@ -34,7 +34,7 @@ public class UserRepositoryTest {
 
     @Test
     public void user_insert_test() {
-        UserEntity user = UserEntity.create(
+        UserEntity user = UserEntity.createUser(
                 "xeropise",
                 "1234",
                 "whrbql1@gmail.com"
@@ -52,21 +52,20 @@ public class UserRepositoryTest {
 
     @Test
     public void user_and_user_role_insert_test() {
-        UserEntity user = UserEntity.create(
+        UserEntity user = UserEntity.createUser(
                 "xeropise",
                 "1234",
                 "whrbql1@gmail.com"
         );
 
         user.addRole(RoleType.ADMIN);
-        user.addRole(RoleType.USER);
         user = userRepository.save(user);
         testEntityManager.flush();
     }
 
     @Test
     public void user_and_user_role_update_test() {
-        UserEntity user = UserEntity.create(
+        UserEntity user = UserEntity.createUser(
                 "xeropise",
                 "1234",
                 "whrbql1@gmail.com"
@@ -82,7 +81,7 @@ public class UserRepositoryTest {
 
     @Test
     public void user_and_user_role_delete_test() {
-        UserEntity user = UserEntity.create(
+        UserEntity user = UserEntity.createUser(
                 "xeropise",
                 "1234",
                 "whrbql1@gmail.com"
