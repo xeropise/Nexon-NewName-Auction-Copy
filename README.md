@@ -40,15 +40,12 @@
 
 - 유저 도메인
 
-![유저 도메인](https://velog.velcdn.com/images/xeropise1/post/32194bb6-0148-4a3d-8494-0d2b4a99d01a/image.png)
+![유저 도메인](https://velog.velcdn.com/images/xeropise1/post/5986ccf2-a041-42d0-a694-1378753c9c29/image.png)
 
 
 ---
 
 ### 💡비즈니스 개발 (2023.09.30 ~ 추석, 면접 시즌이라 중단 중)
-
-
-
 
 ---
 
