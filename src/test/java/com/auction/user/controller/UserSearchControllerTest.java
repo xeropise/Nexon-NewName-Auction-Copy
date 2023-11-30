@@ -29,9 +29,7 @@ public class UserSearchControllerTest extends UserSpringBootTestClass {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        ApiResponse<TokenResponse> response = objectMapper.readValue(result.getResponse().getContentAsString()
-                , new TypeReference<>() {
-                });
+        ApiResponse<TokenResponse> response = objectMapper.readValue(result.getResponse().getContentAsString(), new TypeReference<>() {});
 
         String accessToken = response.getBody().getAccessToken();
         UUID userId = response.getBody().getUserId();

@@ -2,6 +2,7 @@ package com.auction.user.service;
 
 import com.auction.user.entity.RoleEntity;
 import com.auction.user.entity.UserEntity;
+import com.auction.user.entity.UserRoleEntity;
 import com.auction.user.exception.RoleNotFoundException;
 import com.auction.user.exception.UserNotFoundException;
 import com.auction.user.model.type.RoleType;
@@ -23,7 +24,10 @@ public class UserRoleService {
     public void addRole(final UUID userId, RoleType roleType) {
         UserEntity user = userRepository.findWithFetchByUserId(userId).orElseThrow(UserNotFoundException::new);
         RoleEntity role = roleRepository.findByRoleType(roleType).orElseThrow(RoleNotFoundException::new);
+
+        UserRoleEntity userRole = UserRoleEntity.create(user, role);
         user.addRole(role);
+        userRepository.save(user);
     }
 
     @Transactional
@@ -31,5 +35,6 @@ public class UserRoleService {
         UserEntity user = userRepository.findWithFetchByUserId(userId).orElseThrow(UserNotFoundException::new);
         RoleEntity role = roleRepository.findByRoleType(roleType).orElseThrow(RoleNotFoundException::new);
         user.removeRole(role);
+        userRepository.save(user);
     }
 }

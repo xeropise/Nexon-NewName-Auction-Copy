@@ -28,6 +28,6 @@ public class UserRegisterController {
                 userRegisterRequest.getEmail()
         );
 
-        return ApiResponse.success(true);
+        return ApiResponse.created(true);
     }
 }

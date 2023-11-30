@@ -2,6 +2,7 @@ package com.auction.user.entity;
 
 import com.auction.common.entity.AbstractSystemEntity;
 import com.auction.user.model.type.RoleType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,8 @@ public class UserRoleEntity extends AbstractSystemEntity {
     private UUID userRoleId;
 
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "userId", updatable = false)
+    @JsonBackReference
     private UserEntity user;
 
     @ManyToOne

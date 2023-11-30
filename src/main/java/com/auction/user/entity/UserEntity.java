@@ -3,6 +3,7 @@ package com.auction.user.entity;
 
 import com.auction.common.entity.AbstractSystemEntity;
 import com.auction.user.model.type.RoleType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -33,6 +34,7 @@ public class UserEntity extends AbstractSystemEntity {
     private String email;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, orphanRemoval = true)
+    @JsonManagedReference
     private Set<UserRoleEntity> userRoles = new LinkedHashSet<>();
 
     private UserEntity(String account, String password, String email) {
