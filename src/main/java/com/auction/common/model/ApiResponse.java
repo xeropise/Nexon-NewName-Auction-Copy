@@ -24,6 +24,14 @@ public class ApiResponse<T> {
         return new ApiResponse<>(ResponseHeader.success(), body);
     }
 
+    public static <T> ApiResponse created(T body) {
+        return new ApiResponse<>(ResponseHeader.created(), body);
+    }
+
+    public static <T> ApiResponse noContent(T body) {
+        return new ApiResponse<>(ResponseHeader.noContent(), body);
+    }
+
     public static <T> ApiResponse fail(ResponseCode errorCode, String errorMessage) {
         return new ApiResponse(ResponseHeader.fail(errorCode, errorMessage), new HashMap<Object, Object>());
     }

@@ -6,6 +6,8 @@ public enum ResponseCode {
     NOT_FOUND,
     SUCCESS,
     CREATED,
+
+    NO_CONTENT,
     BAD_REQUEST,
     FORBIDDEN,
 
