@@ -16,13 +16,13 @@ import java.util.Optional;
 public class UserRepositoryTest {
 
     @Autowired
-    private final UserRepository userRepository = null;
+    private UserRepository userRepository;
 
     @Autowired
-    private final RoleRepository roleRepository = null;
+    private RoleRepository roleRepository;
 
     @Autowired
-    private final TestEntityManager testEntityManager = null;
+    private TestEntityManager testEntityManager;
 
     @AfterEach
     void delete_all() {
@@ -45,7 +45,7 @@ public class UserRepositoryTest {
 
         user = userRepository.save(user);
 
-        Optional<UserEntity> optionalUser = userRepository.findByUserId(user.getUserId());
+        Optional<UserEntity> optionalUser = userRepository.findWithFetchByUserId(user.getUserId());
 
         UserEntity fetchedUser = optionalUser.get();
 
@@ -61,7 +61,7 @@ public class UserRepositoryTest {
         );
 
 
-        user.addRole(roleRepository.findByRoleType(RoleType.USER));
+        user.addRole(roleRepository.findByRoleType(RoleType.USER).get());
         user = userRepository.save(user);
         testEntityManager.flush();
     }
@@ -74,11 +74,11 @@ public class UserRepositoryTest {
                 "whrbql1@gmail.com"
         );
 
-        user.addRole(roleRepository.findByRoleType(RoleType.ADMIN));
+        user.addRole(roleRepository.findByRoleType(RoleType.ADMIN).get());
         user = userRepository.save(user);
         testEntityManager.flush();
 
-        user.removeRole(roleRepository.findByRoleType(RoleType.ADMIN));
+        user.removeRole(roleRepository.findByRoleType(RoleType.ADMIN).get());
         testEntityManager.flush();
     }
 
@@ -90,7 +90,7 @@ public class UserRepositoryTest {
                 "whrbql1@gmail.com"
         );
 
-        user.addRole(roleRepository.findByRoleType(RoleType.ADMIN));
+        user.addRole(roleRepository.findByRoleType(RoleType.ADMIN).get());
         user = userRepository.save(user);
         testEntityManager.flush();
 

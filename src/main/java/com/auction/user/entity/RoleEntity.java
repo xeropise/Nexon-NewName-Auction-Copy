@@ -18,11 +18,11 @@ public class RoleEntity extends AbstractSystemEntity {
     @Column(columnDefinition = "BINARY(16)")
     private UUID roleId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
 
-    @Column(nullable = true)
+    @Column
     private String description;
 
     private RoleEntity(RoleType roleType) {

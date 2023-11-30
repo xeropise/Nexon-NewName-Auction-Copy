@@ -56,7 +56,7 @@ public abstract class UserSpringBootTestClass {
 
     }
 
-    protected ResultActions reigster_first(String account, String password, String email) throws Exception {
+    protected ResultActions register(String account, String password, String email) throws Exception {
         UserRegisterRequest userRegisterRequest = new UserRegisterRequest(account, password, email);
 
         ObjectMapper mapper = new ObjectMapper();

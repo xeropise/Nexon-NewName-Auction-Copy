@@ -26,7 +26,7 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
                               WHERE u.userId = :uuid
                     """
     )
-    Optional<UserEntity> findByUserId(UUID uuid);
+    Optional<UserEntity> findWithFetchByUserId(UUID uuid);
 
     @Query(
             """
@@ -36,7 +36,7 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
                               WHERE u.account = :account
                     """
     )
-    Optional<UserEntity> findByAccount(String account);
+    Optional<UserEntity> findWithFetchByAccount(String account);
 
     @Query(
             """
@@ -46,7 +46,7 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
                               WHERE u.email = :email
                     """
     )
-    Optional<UserEntity> findByEmail(String email);
+    Optional<UserEntity> findWithFetchByEmail(String email);
 
     boolean existsByAccountOrEmail(String account, String email);
 }

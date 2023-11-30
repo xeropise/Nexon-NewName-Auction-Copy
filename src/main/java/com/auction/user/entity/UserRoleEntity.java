@@ -3,14 +3,15 @@ package com.auction.user.entity;
 import com.auction.common.entity.AbstractSystemEntity;
 import com.auction.user.model.type.RoleType;
 import jakarta.persistence.*;
-import lombok.RequiredArgsConstructor;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 
 @Table(name = "USER_ROLE")
 @Entity
-@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserRoleEntity extends AbstractSystemEntity {
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -30,9 +31,14 @@ public class UserRoleEntity extends AbstractSystemEntity {
         this.user = user;
         this.role = role;
     }
-    
+
     public UUID getUserRoleId() {
         return userRoleId;
+    }
+
+    public UserRoleEntity changeUser(UserEntity user) {
+        this.user = user;
+        return this;
     }
 
     public RoleEntity getRole() {

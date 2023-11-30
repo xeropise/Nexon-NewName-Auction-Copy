@@ -2,7 +2,8 @@ package com.auction.user.service;
 
 import com.auction.user.entity.RoleEntity;
 import com.auction.user.entity.UserEntity;
-import com.auction.user.exception.AccountExistsException;
+import com.auction.user.exception.RoleNotFoundException;
+import com.auction.user.exception.UserAlreadyExistException;
 import com.auction.user.model.type.RoleType;
 import com.auction.user.repository.RoleRepository;
 import com.auction.user.repository.UserRepository;
@@ -31,11 +32,11 @@ public class UserRegisterService {
 
             UserEntity user = UserEntity.create(account, password, email);
 
-            RoleEntity userRole = roleRepository.findByRoleType(RoleType.USER);
+            RoleEntity userRole = roleRepository.findByRoleType(RoleType.USER).orElseThrow(RoleNotFoundException::new);
             user.addRole(userRole);
             userRepository.save(user);
         } else {
-            throw new AccountExistsException("user already exists");
+            throw new UserAlreadyExistException();
         }
     }
 }

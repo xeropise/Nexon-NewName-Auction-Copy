@@ -2,8 +2,8 @@ package com.auction.advice;
 
 import com.auction.common.model.ApiResponse;
 import com.auction.common.model.ResponseCode;
-import com.auction.user.exception.AccountExistsException;
 import com.auction.user.exception.PasswordNotMatchException;
+import com.auction.user.exception.UserAlreadyExistException;
 import com.auction.user.exception.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -33,11 +33,11 @@ public class ExceptionController {
         return ApiResponse.fail(ResponseCode.BAD_REQUEST, firstError.getDefaultMessage());
     }
 
-    @ExceptionHandler(AccountExistsException.class)
+    @ExceptionHandler(UserAlreadyExistException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    ApiResponse accountExistsException(Exception exception) {
-        log.error("accountExistsException message : {}", exception.getMessage());
-        return ApiResponse.fail(ResponseCode.ACCOUNT_EXISTS, exception.getMessage());
+    ApiResponse userAlreadyExistException(Exception exception) {
+        log.error("userAlreadyExistException message : {}", exception.getMessage());
+        return ApiResponse.fail(ResponseCode.USER_ALREADY_EXIST, exception.getMessage());
     }
 
     @ExceptionHandler(PasswordNotMatchException.class)

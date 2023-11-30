@@ -17,24 +17,24 @@ public class UserSearchService {
 
     @Transactional(readOnly = true)
     public UserDto findUserByUserId(UUID userId) {
-        UserEntity user = userRepository.findByUserId(userId)
-                .orElseThrow(() -> new UserNotFoundException("user not found by userId"));
+        UserEntity user = userRepository.findWithFetchByUserId(userId)
+                .orElseThrow(UserNotFoundException::new);
 
         return UserDto.from(user);
     }
 
     @Transactional(readOnly = true)
     public UserDto findUserByAccount(String account) {
-        UserEntity user = userRepository.findByAccount(account)
-                .orElseThrow(() -> new UserNotFoundException("user not found by account"));
+        UserEntity user = userRepository.findWithFetchByAccount(account)
+                .orElseThrow(UserNotFoundException::new);
 
         return UserDto.from(user);
     }
 
     @Transactional(readOnly = true)
     public UserDto findUserByEmail(String email) {
-        UserEntity user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException("user not found by email"));
+        UserEntity user = userRepository.findWithFetchByEmail(email)
+                .orElseThrow(UserNotFoundException::new);
 
         return UserDto.from(user);
     }

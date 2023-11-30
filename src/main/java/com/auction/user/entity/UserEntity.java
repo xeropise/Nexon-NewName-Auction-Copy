@@ -4,6 +4,7 @@ package com.auction.user.entity;
 import com.auction.common.entity.AbstractSystemEntity;
 import com.auction.user.model.type.RoleType;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -14,7 +15,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "USER")
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserEntity extends AbstractSystemEntity {
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -42,11 +43,14 @@ public class UserEntity extends AbstractSystemEntity {
 
     public void addRole(RoleEntity role) {
         UserRoleEntity userRole = UserRoleEntity.create(this, role);
-        userRoles.add(userRole);
+        userRoles.add(userRole.changeUser(this));
     }
 
     public void removeRole(RoleEntity role) {
-        userRoles.removeIf(it -> it.getRole().equals(role));
+        userRoles.removeIf(it -> {
+            it.changeUser(null);
+            return it.getRole().equals(role);
+        });
     }
 
     public UUID getUserId() {

@@ -1,11 +1,9 @@
 package com.auction.user.exception;
 
+import com.auction.common.constant.ErrorMessage;
+
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException() {
-        super("");
-    }
-
-    public UserNotFoundException(String message) {
-        super(message);
+        super(ErrorMessage.USER_NOT_FOUND.getMessage());
     }
 }

@@ -11,7 +11,7 @@ public enum ResponseCode {
 
 
     // user
-    ACCOUNT_EXISTS,
+    USER_ALREADY_EXIST,
     PASSWORD_NOT_MATCH,
     USER_NOT_FOUND;
 
