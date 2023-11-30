@@ -31,4 +31,53 @@ CREATE TABLE `ROLE`
     updateDatetime datetime(6) not null
 );
 
+CREATE TABLE `BID`
+(
+    bidId            binary(16) not null primary key,
+    characterItemId  binary(16) not null,
+    startingPrice    int not null,
+    registrationTime datetime(6) not null,
+    endTime          datetime(6) not null,
+    userId           binary(16) not null,
+    insertDatetime   datetime(6) not null,
+    updateDatetime   datetime(6) not null
+);
+
+CREATE TABLE `BID_DETAIL`
+(
+    bidDetailId    binary(16) not null primary key,
+    bidMoney       int not null,
+    bidId          binary(16) not null,
+    insertDatetime datetime(6) not null,
+    updateDatetime datetime(6) not null
+);
+
+CREATE TABLE `CHARACTER`
+(
+    characterId    binary(16) not null primary key,
+    name           varchar(255) not null,
+    userId         binary(16) not null,
+    insertDatetime datetime(6) not null,
+    updateDatetime datetime(6) not null
+);
+
+CREATE TABLE `CHARACTER_ITEM`
+(
+    characterItemId binary(16) not null primary key,
+    characterId     binary(16) not null,
+    itemId          binary(16) not null,
+    count           int,
+    onBidding       tinyint(1) not null,
+    insertDatetime  datetime(6) not null,
+    updateDatetime  datetime(6) not null
+);
+
+CREATE TABLE `ITEM`
+(
+    itemId         binary(16) not null primary key,
+    name           varchar(255) not null,
+    isConsumable   tinyint(1) not null,
+    insertDatetime datetime(6) not null,
+    updateDatetime datetime(6) not null
+);
 
