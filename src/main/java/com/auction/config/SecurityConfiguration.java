@@ -1,6 +1,7 @@
 package com.auction.config;
 
 import com.auction.common.component.JwtVerifier;
+import com.auction.common.constant.CharacterEndPointPath;
 import com.auction.common.constant.UserEndPointPath;
 import com.auction.config.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +42,8 @@ public class SecurityConfiguration {
                 .requestMatchers(HttpMethod.GET, UserEndPointPath.SEARCH).authenticated()
                 .requestMatchers(HttpMethod.POST, UserEndPointPath.ADD_ROLE).authenticated()
                 .requestMatchers(HttpMethod.DELETE, UserEndPointPath.REMOVE_ROLE).authenticated()
+                .requestMatchers(HttpMethod.POST, CharacterEndPointPath.CREATE).authenticated()
+                .requestMatchers(HttpMethod.GET, CharacterEndPointPath.SEARCH_LIST).authenticated()
                 .requestMatchers("/health").permitAll()
                 .anyRequest().permitAll()
                 .and()

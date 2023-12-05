@@ -28,14 +28,3 @@ server:
       min-spare: 50
       max: 50
 ---
-spring:
-  config:
-    activate:
-      on-profile: prod
-
-server:
-  tomcat:
-    threads:
-      min-spare: 50
-      max: 50
----

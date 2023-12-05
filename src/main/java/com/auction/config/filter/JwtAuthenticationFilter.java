@@ -30,7 +30,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         } else if (!authorizationHeader.startsWith(TOKEN_PREFIX)) {
             authorizationHeader = "";
         }
-        return authorizationHeader = authorizationHeader.replace(TOKEN_PREFIX, "");
+        return authorizationHeader.replace(TOKEN_PREFIX, "");
     }
 
     @Override

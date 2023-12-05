@@ -23,10 +23,10 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
             """
                               SELECT DISTINCT u FROM UserEntity u 
                               LEFT JOIN FETCH u.userRoles ur
-                              WHERE u.userId = :uuid
+                              WHERE u.userId = :userId
                     """
     )
-    Optional<UserEntity> findWithFetchByUserId(UUID uuid);
+    Optional<UserEntity> findWithFetchByUserId(UUID userId);
 
     @Query(
             """

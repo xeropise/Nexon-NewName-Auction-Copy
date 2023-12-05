@@ -52,19 +52,21 @@ CREATE TABLE `BID_DETAIL`
     updateDatetime datetime(6) not null
 );
 
-CREATE TABLE `CHARACTER`
+CREATE TABLE `USER_CHARACTER`
 (
-    characterId    binary(16) not null primary key,
-    name           varchar(255) not null,
-    userId         binary(16) not null,
-    insertDatetime datetime(6) not null,
-    updateDatetime datetime(6) not null
+    userCharacterId    binary(16) not null primary key,
+    name               varchar(255) not null,
+    userId             binary(16) not null,
+    insertDatetime     datetime(6) not null,
+    updateDatetime     datetime(6) not null
 );
+
+create index USER_CHARACTER_userId on USER_CHARACTER (userId);
 
 CREATE TABLE `CHARACTER_ITEM`
 (
     characterItemId binary(16) not null primary key,
-    characterId     binary(16) not null,
+    userCharacterId binary(16) not null,
     itemId          binary(16) not null,
     count           int,
     onBidding       tinyint(1) not null,

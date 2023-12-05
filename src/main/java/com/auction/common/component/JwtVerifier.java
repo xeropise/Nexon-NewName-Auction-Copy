@@ -16,7 +16,7 @@ import static com.auction.common.constant.JwtConstant.ROLES;
 @Component
 public class JwtVerifier {
     private String secret;
-    private JWTVerifier jwtVerifier = null;
+    private JWTVerifier jwtVerifier;
 
     /**
      * @param secret

@@ -45,6 +45,8 @@ public class UserRepositoryTest {
 
         user = userRepository.save(user);
 
+        testEntityManager.flush();
+
         Optional<UserEntity> optionalUser = userRepository.findWithFetchByUserId(user.getUserId());
 
         UserEntity fetchedUser = optionalUser.get();

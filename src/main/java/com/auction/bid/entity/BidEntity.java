@@ -1,6 +1,6 @@
 package com.auction.bid.entity;
 
-import com.auction.character.entity.CharacterItemEntity;
+import com.auction.usercharacter.entity.UserCharacterItemEntity;
 import com.auction.common.entity.AbstractSystemEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -24,7 +24,7 @@ public class BidEntity extends AbstractSystemEntity {
 
     @OneToOne
     @JoinColumn(name = "characterItemId", unique = true)
-    private CharacterItemEntity characterItem;
+    private UserCharacterItemEntity characterItem;
 
     @Column(nullable = false)
     private int startingPrice;
@@ -49,14 +49,14 @@ public class BidEntity extends AbstractSystemEntity {
     }
 
 
-    private BidEntity(UUID bidId, CharacterItemEntity characterItem, LocalDateTime endTime) {
+    private BidEntity(UUID bidId, UserCharacterItemEntity characterItem, LocalDateTime endTime) {
         this.bidId = bidId;
         this.characterItem = characterItem;
         this.registrationTime = LocalDateTime.now();
         this.endTime = endTime;
     }
 
-    public static BidEntity create(UUID bidId, CharacterItemEntity characterItem, LocalDateTime endTime) {
+    public static BidEntity create(UUID bidId, UserCharacterItemEntity characterItem, LocalDateTime endTime) {
         return new BidEntity(
                 bidId,
                 characterItem,

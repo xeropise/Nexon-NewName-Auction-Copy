@@ -7,17 +7,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class PrincipalDetails implements UserDetails {
-    private final String account;
+    private final String userId;
     private final List<RoleType> roles;
 
     public PrincipalDetails(
-            String account,
+            String userId,
             List<RoleType> roles
     ) {
-        this.account = account;
+        this.userId = userId;
         this.roles = roles;
     }
 
@@ -33,7 +34,11 @@ public class PrincipalDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.account;
+        return this.userId;
+    }
+
+    public UUID getUserId() {
+        return UUID.fromString(getUsername());
     }
 
     @Override

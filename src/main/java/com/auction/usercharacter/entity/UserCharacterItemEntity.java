@@ -1,4 +1,4 @@
-package com.auction.character.entity;
+package com.auction.usercharacter.entity;
 
 import com.auction.common.entity.AbstractSystemEntity;
 import com.auction.item.entity.ItemEntity;
@@ -12,7 +12,7 @@ import java.util.UUID;
 @Table(name = "CHARACTER_ITEM")
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CharacterItemEntity extends AbstractSystemEntity {
+public class UserCharacterItemEntity extends AbstractSystemEntity {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
@@ -20,8 +20,8 @@ public class CharacterItemEntity extends AbstractSystemEntity {
     private UUID characterItemId;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "characterId", updatable = false)
-    private CharacterEntity character;
+    @JoinColumn(name = "userCharacterId", updatable = false)
+    private UserCharacterEntity character;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "itemId", updatable = false)
@@ -38,12 +38,12 @@ public class CharacterItemEntity extends AbstractSystemEntity {
         return characterItemId;
     }
 
-    public CharacterItemEntity changeCharacter(CharacterEntity character) {
+    public UserCharacterItemEntity changeCharacter(UserCharacterEntity character) {
         this.character = character;
         return this;
     }
 
-    public CharacterItemEntity removeCharacter() {
+    public UserCharacterItemEntity removeCharacter() {
         this.character = null;
         return this;
     }
@@ -60,12 +60,12 @@ public class CharacterItemEntity extends AbstractSystemEntity {
         count--;
     }
 
-    private CharacterItemEntity(CharacterEntity character, ItemEntity item) {
+    private UserCharacterItemEntity(UserCharacterEntity character, ItemEntity item) {
         this.character = character;
         this.item = item;
     }
 
-    public static CharacterItemEntity create(CharacterEntity character, ItemEntity item) {
-        return new CharacterItemEntity(character, item);
+    public static UserCharacterItemEntity create(UserCharacterEntity character, ItemEntity item) {
+        return new UserCharacterItemEntity(character, item);
     }
 }
