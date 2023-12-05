@@ -1,11 +1,10 @@
 package com.auction.usercharacter.controller;
 
+import com.auction.common.constant.CharacterEndPointPath;
+import com.auction.common.model.ApiResponse;
 import com.auction.usercharacter.model.UserCharacterDto;
 import com.auction.usercharacter.model.UserCharacterResponse;
 import com.auction.usercharacter.service.UserCharacterSearchService;
-import com.auction.common.constant.CharacterEndPointPath;
-import com.auction.common.model.ApiResponse;
-import com.auction.user.model.response.UserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +19,7 @@ public class UserCharacterSearchController {
     private final UserCharacterSearchService userCharacterSearchService;
 
     @GetMapping(CharacterEndPointPath.SEARCH_LIST)
-    public ApiResponse<UserResponse> searchCharacters(
+    public ApiResponse<List<UserCharacterResponse>> searchCharacters(
             @PathVariable UUID userId
     ) {
         List<UserCharacterDto> userCharacterDtos = userCharacterSearchService.searchList(userId);

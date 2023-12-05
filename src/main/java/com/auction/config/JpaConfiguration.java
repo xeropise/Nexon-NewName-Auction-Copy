@@ -2,8 +2,9 @@ package com.auction.config;
 
 import com.auction.config.properties.HibernateProperties;
 import com.auction.config.properties.JpaProperties;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import lombok.extern.slf4j.Slf4j;
 import org.hibernate.cfg.Environment;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -16,7 +17,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
-import java.util.Objects;
 import java.util.Properties;
 
 @Configuration
@@ -63,5 +63,10 @@ public class JpaConfiguration {
         jpaTransactionManager.setEntityManagerFactory(entityManagerFactory);
 
         return jpaTransactionManager;
+    }
+
+    @Bean
+    public JPAQueryFactory queryFactory(EntityManager entityManager) {
+        return new JPAQueryFactory((EntityManager) entityManager);
     }
 }

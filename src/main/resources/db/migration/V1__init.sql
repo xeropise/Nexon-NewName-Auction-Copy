@@ -79,6 +79,7 @@ CREATE TABLE `ITEM`
     itemId         binary(16) not null primary key,
     name           varchar(255) not null,
     isConsumable   tinyint(1) not null,
+    imageUrl       varchar(1024),
     insertDatetime datetime(6) not null,
     updateDatetime datetime(6) not null
 );
